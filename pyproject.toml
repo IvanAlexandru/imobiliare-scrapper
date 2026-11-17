@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+[project]
+name = "bucharest-apartment-scraper"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = ["httpx==0.28.1", "beautifulsoup4==4.14.2", "PyYAML==6.0.3", "shapely==2.1.2", "tzdata==2025.2"]
+[project.optional-dependencies]
+dev = ["pytest==9.0.1", "pip-audit==2.9.0"]
+[project.scripts]
+apartment-scraper = "apartment_scraper.main:main"
+[tool.pytest.ini_options]
+pythonpath = ["src"]

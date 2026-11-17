@@ -1,0 +1,21 @@
+websites:
+  storia_ro: true
+  imobiliare_ro: true
+filters:
+  city: Bucuresti
+  transaction: SELL
+  property_type: FLAT
+  max_price_eur: 300000
+  min_year: 2016
+  rooms: [3, 4]
+  polygon: {"type": "Polygon", "coordinates": [[[26.0271911, 44.4353983], [26.0856872, 44.4203323], [26.1180518, 44.4086877], [26.1669584, 44.4126266], [26.1614444, 44.4311186], [26.1386693, 44.4318034], [26.134354, 44.477323], [26.0418151, 44.4542254], [26.0281501, 44.4364254], [26.0267116, 44.4352271], [26.0271911, 44.4353983]]]}
+http:
+  timeout: 25
+  interval_seconds: 2
+  retries: 3
+  max_pages: 30
+  max_details: 400
+  user_agent: BucharestApartmentMonitor/1.0
+email:
+  subject: Bucharest apartment scan
+logging_level: INFO
