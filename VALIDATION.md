@@ -50,3 +50,12 @@ No controls were bypassed. Live responses were used only for inspection and pars
 - `requirements.lock`, `requirements-dev.lock`, `README.md`, `VALIDATION.md`
 
 The README includes exact local execution, Resend setup, private GitHub repository/Secrets setup, manual triggering, schedule behavior, logging and troubleshooting steps.
+
+
+## Diagnostics update — 17 November 2026
+
+53 mocked unit tests passed after adding safe Resend rejection classification,
+malformed provider response handling, whitespace trimming for email settings,
+and redacted redirect diagnostics. No live email was sent and no new live
+scraping claim is made by this update. The exact cause of the user's Resend
+rejection requires its provider log or the new classified diagnostic.

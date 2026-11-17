@@ -144,3 +144,18 @@ Use an explicitly writable `--cache-dir` when auditing in a restricted environme
 `src/apartment_scraper/` contains independent adapters, rate-limited robots-aware HTTP, config, data models, filtering, duplicate handling, reporting, delivery and CLI. `.github/workflows/` holds scheduled and test jobs. `tests/fixtures/` contains **synthetic minimal HTML**, modeled on inspected structures; no actual listings, user/session tokens or scraped reports are included. `requirements*.lock` pin runtime/test dependencies with hashes.
 
 See `VALIDATION.md` for executed tests, live observations and untested integration boundaries. No GitHub repository was created or workflow activated, and no live email was sent as part of building this project.
+
+
+## Resend rejection diagnostics
+
+If the workflow says Email provider rejected delivery, inspect the Resend request
+logs. With this update, failures include the HTTP status, an allowlisted error
+code, and a safe configuration hint. Raw provider messages and email addresses
+are never logged. In test mode, use your Resend account email as recipient; to
+send to other recipients, verify a sender domain and use it in REPORT_EMAIL_FROM.
+GitHub Secrets contain literal values without shell quotes or export statements.
+
+Redirects remain refused. Warnings now identify the destination origin and route
+without logging query strings, credentials or listing slugs. No 403 bypass was
+added. A redirect or source block still produces partial coverage when other
+listing data is available.

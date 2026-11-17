@@ -1,5 +1,5 @@
 import time
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urljoin
 from .robots import Robots
 import httpx
 
@@ -28,7 +28,13 @@ class Client:
                 if r.status_code >= 500:
                     raise httpx.TransportError("Transient server error")
                 if r.is_redirect:
-                    raise AccessError("Redirect encountered; review destination before enabling")
+                    target = urlsplit(urljoin(url, r.headers.get("location", "")))
+                    # Log only origin and route; omit listing slugs, query, credentials and fragment.
+                    route = "/".join(target.path.split("/")[:3])
+                    if len(target.path.split("/")) > 3:
+                        route += "/[redacted]"
+                    origin = f"{target.scheme}://{target.hostname or '[missing host]'}"
+                    raise AccessError(f"HTTP {r.status_code} redirect to {origin}{route}; not followed; coverage incomplete")
                 r.raise_for_status()
                 return r.text
             except (httpx.TransportError, httpx.TimeoutException):
